@@ -1,41 +1,42 @@
-const questions = document.querySelectorAll(".qnalist details");
+import { renderHeader } from './module/header.js';
+import { renderFooter } from './module/footer.js';
 
-/*
-  let c = a.getAttribute('title')
-  a.setAttribute(b,c)  a에서b 속성의 값을 c로 변경
-  대상.removeAttribute(속성명)
-  
-  속성의 존재 유무
-  대상.hasAttribute(속성명)  true, false
-*/
+document.addEventListener('DOMContentLoaded', () => {
+  renderHeader();
+  renderFooter();
+  if (document.querySelector('.portfolio')) {
+    new Swiper('.portfolio', {
+      loop: true,
+      slidesPerView: 1,
+      navigation: {
+        nextEl: '.portfolio .swiper-button-next',
+        prevEl: '.portfolio .swiper-button-prev',
+      },
+      pagination: {
+        el: '.portfolio .swiper-pagination',
+        clickable: true,
+      },
+    });
+  }
+});
+const header = document.querySelector("body > header");
+if (header) {
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 0) {
+      header.classList.add("fixed");
+    } else {
+      header.classList.remove("fixed");
+    }
+  });
+}
+const questions = document.querySelectorAll(".qnalist details");
 questions.forEach(question => {
   question.addEventListener("click", e => {
     e.preventDefault();
-    //open 상태 확인
     let isOpen = question.hasAttribute("open");
-
-    //모든 details에서 open 제거
-    questions.forEach(q => {
-      q.removeAttribute("open");
-    });
-    //isOpen true면 접고, isOpen false 열기
-    // if (isOpen === false) {
+    questions.forEach(q => q.removeAttribute("open"));
     if (!isOpen) {
       question.setAttribute("open", "");
     }
   });
 });
-
-/*
-questions.forEach(q => {
-  q.addEventListener("click", () => {
-    let parent = q.parentElement.parentElement;
-    let siblings = [...parent.children];
-    siblings.forEach(sibling => {
-      if (parent !== sibling) {
-        sibling.querySelector("details").removeAttribute("open");
-      }
-    });
-  });
-});
-*/
