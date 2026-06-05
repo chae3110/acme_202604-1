@@ -228,6 +228,7 @@ section.portfolio {
   justify-content: center;
   gap: var(--base-unit);
   text-align: center;
+  padding-bottom:40px;
 }
 .portfolio .swiper-slide img,
 .testimonial .swiper-slide img {
@@ -262,7 +263,7 @@ section.portfolio {
   color: var(--light--gray); 
   cursor: pointer;
   position: absolute;
-  top: 50%; 
+  top: calc(50% - 24px); 
   transform: translateY(-50%);
   z-index: 10;
 }
@@ -275,8 +276,9 @@ section.portfolio {
 
 .portfolio .swiper-button-next,
 .testimonial .swiper-button-next { right: 0; }
-.swiper-pagination {
-  bottom: 20px;
+.portfolio .swiper-pagination {
+  bottom: 10px;
+  position:absolute;
 }
 .swiper-pagination-bullet-active {
   background: var(--primary);
